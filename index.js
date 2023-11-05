@@ -9,11 +9,16 @@ app.use(express.json());
 app.use(cors()); // se debería diseñar el control de la API con una key/contraseña, etc...
 
 app.get("/", async (req, res)=>{
-    const [resultado] = await pool.query("SELECT * FROM tabla_amigos WHERE nro_orden = 1 ");
+    try {
+    const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); // WHERE nro_orden = 1 ");
     console.log(resultado);
-    //console.log(req.query);
-    //res.send(`<h1> Hola 1 </h1>`)
     res.json(resultado);
+    } catch (error) {
+        res.status(500).json({
+            informe: "Algo salio mal",
+            error: error
+        })
+    }
 }); 
 
 app.get("/mi-api/",(req, res)=>{
