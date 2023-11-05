@@ -1,14 +1,19 @@
 import express from "express";
 import cors from "cors";
+import pool from "./conexionDB.js";
+
 
 const app = express();
 
 app.use(express.json());
 app.use(cors()); // se debería diseñar el control de la API con una key/contraseña, etc...
 
-app.get("/",(req, res)=>{
-    console.log(req.query);
-    res.send(`<h1> Hola 1 </h1>`)
+app.get("/", async (req, res)=>{
+    const [resultado] = await pool.query("SELECT * FROM tabla_amigos WHERE nro_orden = 1 ");
+    console.log(resultado);
+    //console.log(req.query);
+    //res.send(`<h1> Hola 1 </h1>`)
+    res.json(resultado);
 }); 
 
 app.get("/mi-api/",(req, res)=>{
@@ -16,9 +21,10 @@ app.get("/mi-api/",(req, res)=>{
     res.send(`<h1> Hola 2 ${req.query.param2}</h1>`)
 }); 
 
-app.get("/mi-api/:id",(req, res)=>{
+app.get("/mi-api/:id", async (req, res)=>{
     console.log(req.params);
-    res.send("<h1> Hola 3 </h1>")
+    const [resultado] = await pool.query("SELECT * FROM tabla_amigos WHERE nro_orden = ? ", req.params.id); 
+    res.json(resultado);
 }); 
 
 app.post("/mi-api",(req, res)=>{
