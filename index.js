@@ -11,7 +11,7 @@ app.use(cors()); // se debería diseñar el control de la API con una key/contra
 app.get("/", async (req, res)=>{
     try {
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); // WHERE nro_orden = 1 ");
-    console.log(resultado);
+    console.log("El resultado: "+resultado);
     res.json(resultado);
     } catch (error) {
         res.status(500).json({
