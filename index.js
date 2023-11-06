@@ -23,7 +23,7 @@ app.get("/", async (req, res)=>{
 
 app.get("/mi-api/",(req, res)=>{
     console.log(req.query);
-    res.send(`<h1> Hola 2 ${req.query.param2}</h1>`)
+    res.send(`<h1> Hola 22 ${req.query.param2}</h1>`)
 }); 
 
 app.get("/mi-api/:id", async (req, res)=>{
