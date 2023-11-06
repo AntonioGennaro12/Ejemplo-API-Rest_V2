@@ -1,11 +1,9 @@
 import { createPool } from "mysql2/promise";
 import configuracion from "./configuracion.js";
 
-
-
 /* Creo la tabla segun los datos mínimos requeridos */
 const CREAR_TABLA = ` 
-    CREATE TABLE IF NOT EXIST tabla_amigos(
+    CREATE TABLE IF NOT EXISTS tabla_amigos(
         nro_orden INT NOT NULL AUTO_INCREMENT,
         amigo_nombre VARCHAR(25) NOT NULL,
         amigo_apellido VARCHAR(25) NOT NULL, 
