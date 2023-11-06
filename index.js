@@ -11,50 +11,92 @@ app.use(cors()); // se debería diseñar el control de la API con una key/contra
 app.get("/", async (req, res)=>{
     try {
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); // WHERE nro_orden = 1 ");
-    console.log("El resultado: "+resultado);
+    console.log("El resultado es: "+resultado);
     res.json(resultado);
     } catch (error) {
         res.status(500).json({
-            informe: "Algo salio mal",
+            informe: "Algo salio mal Get 1",
             error: error
-        })
-    }
+        });
+    };
 }); 
 
 app.get("/mi-api/",(req, res)=>{
+    try{
     console.log(req.query);
     res.send(`<h1> Hola 22 ${req.query.param2}</h1>`)
+    } catch (error) {
+        res.status(500).json({
+        informe: "Algo salio mal Get 2",
+        error: error
+        });
+    };
 }); 
 
 app.get("/mi-api/:id", async (req, res)=>{
+    try {
     console.log(req.params);
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos WHERE nro_orden = ? ", req.params.id); 
     res.json(resultado);
+    } catch (error) {
+    res.status(500).json({
+        informe: "Algo salio mal Get 3",
+        error: error
+        });
+    };
 }); 
 
 app.post("/mi-api",(req, res)=>{
+    try {
     console.log(req.body);
     // debería crear algo en la base de datos
     res.status(201).json(req.body.info2);
-})
+    } catch (error) {
+        res.status(500).json({
+        informe: "Algo salio mal Post 1",
+        error: error
+        });
+    };
+});
 
 app.post("/mi-api/:nombre",(req, res)=>{
+    try {
     // crea pidiendo info en la url
     res.status(201).send(`<h2> ${req.params.nombre}</h2>`);
-})
+    } catch (error) {
+        res.status(500).json({
+        informe: "Algo salio mal Post 2",
+        error: error
+        });
+    };
+});
 
 app.put("/mi-api",(req, res)=>{
+    try {
     // debería crear algo en la base de datos
     res.json({
     mensaje: "PUT todo OK" 
     });
-})
+    } catch (error) {
+        res.status(500).json({
+        informe: "Algo salio mal Put",
+        error: error
+        });
+    };
+});
 
 app.delete("/mi-api",(req, res)=>{
+    try {
     // debería crear algo en la base de datos
     res.json({
     mensaje: "DELETE tooodo OK" 
     });
+    } catch (error) {
+        res.status(500).json({
+        informe: "Algo salio mal Delete",
+        error: error
+        })
+    };
 })
 
 // URL: desde el navegador local
