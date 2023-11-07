@@ -46,14 +46,15 @@ app.get("/mi-api/:id", async (req, res)=>{
     };
 }); 
 
-app.post("/mi-api",(req, res)=>{
-    try {
+app.post("/mi-api", async(req, res)=>{
     console.log(req.body);
-    // debería crear algo en la base de datos
-    res.status(201).json(req.body.info2);
+    const { nombre, apellido, telefono, email } = req.body;
+    try {
+        await pool.query('INSERT INTO tabla_amigos (nombre, apellido, telefono, email) VALUES (?, ?, ?, ?)', [nombre, apellido, telefono, email]);
+        res.status(201).json({ mensaje: 'Elemento agregado con éxito.' });
     } catch (error) {
         res.status(500).json({
-        informe: "Algo salio mal Post 1",
+        informe: "Error al agregar elemento en tabla_amigos",
         error: error
         });
     };
