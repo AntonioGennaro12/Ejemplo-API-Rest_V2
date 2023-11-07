@@ -11,7 +11,8 @@ app.use(cors()); // se debería diseñar el control de la API con una key/contra
 app.get("/", async (req, res)=>{
     try {
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); // WHERE nro_orden = 1 ");
-    console.log("El resultado es: "+resultado);
+    console.table("El resultado del GET 'vacío' es: ");
+    console.table(resultado);
     res.json(resultado);
     } catch (error) {
         res.status(500).json({
@@ -57,6 +58,7 @@ app.post("/mi-api", async(req, res)=>{
         console.log("Falló el try, entró al ERROR 500");
         res.status(500).json({
         informe: "Error al agregar elemento en tabla_amigos",
+
         error: error
         });
     };
