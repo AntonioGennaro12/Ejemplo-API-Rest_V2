@@ -10,6 +10,8 @@ app.use(cors()); // se debería diseñar el control de la API con una key/contra
 
 app.get("/", async (req, res)=>{
     try {
+    console.log("Esto es lo que llegó como req en Get 1:");
+    console.log(req.query);
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); // WHERE nro_orden = 1 ");
     console.table("El resultado del GET 'vacío' es: ");
     console.table(resultado);
@@ -24,6 +26,7 @@ app.get("/", async (req, res)=>{
 
 app.get("/mi-api/",(req, res)=>{
     try{
+    console.log("Esto es lo que llegó de req en Get 2:");
     console.log(req.query);
     res.send(`<h1> Hola 22 ${req.query.param2}</h1>`)
     } catch (error) {
@@ -36,6 +39,7 @@ app.get("/mi-api/",(req, res)=>{
 
 app.get("/mi-api/:id", async (req, res)=>{
     try {
+    console.log("Esto es lo que llegó como Id:");
     console.log(req.params);
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos WHERE nro_orden = ? ", req.params.id); 
     res.json(resultado);
