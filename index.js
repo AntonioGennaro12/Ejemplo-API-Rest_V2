@@ -50,7 +50,8 @@ app.post("/mi-api", async(req, res)=>{
     console.log("LLegó el POST: "+req.body);
     const { nombre, apellido, telefono, email } = req.body;
     try {
-        await pool.query('INSERT INTO tabla_amigos (nombre, apellido, telefono, email) VALUES (?, ?, ?, ?)', [nombre, apellido, telefono, email]);
+        await pool.query('INSERT INTO tabla_amigos (amigo_nombre, amigo_apellido, amigo_telefono, amigo_email) VALUES (?, ?, ?, ?)', 
+                                        [nombre, apellido, telefono, email]);
         res.status(201).json({ mensaje: 'Elemento agregado con éxito.' });
     } catch (error) {
         console.log("Falló el try, entró al ERROR 500");
