@@ -15,7 +15,7 @@ const CREAR_TABLA = `
 
 const pool = createPool({
     host: configuracion.HOST,
-    port: configuracion.PORT,
+    port: configuracion.DB_PORT,
     user: configuracion.USER,
     password: configuracion.PASSWORD,
     database: configuracion.NAME
