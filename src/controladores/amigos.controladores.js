@@ -3,7 +3,7 @@ import pool from "../conexionDB.js";
 
 async function obtenerAmigos (req, res) {
     try {
-    console.log("Esto es lo que llegó como req en GET all:");s
+    console.log("Esto es lo que llegó como req en GET all:");
     console.log(req.query);
     const [resultado] = await pool.query("SELECT * FROM tabla_amigos"); 
     console.table("El resultado del 'GET all' es: ");
