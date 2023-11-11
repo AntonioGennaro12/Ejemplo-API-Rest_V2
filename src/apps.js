@@ -5,7 +5,22 @@ import amigosRutas from "./rutas/amigos.rutas.js";
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // se debería diseñar el control de la API con una key/contraseña, etc...
+
+const urlsPermitidas = ["http://127.0.0.1:5502"]; 
+
+app.use(cors({
+    origin: (origin, callback)=>{
+        console.log(origin);
+        if(urlsPermitidas.includes(origin) || !origin) {
+            callback(null, true);
+        }
+        else{
+            const error = new Error ("No permitido por Cors");
+            error.status = 401;
+            callback(error, false);
+        }
+    }
+})); 
 
 app.use("/amigos/", amigosRutas);
 
