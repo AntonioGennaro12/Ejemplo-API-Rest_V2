@@ -8,6 +8,7 @@ const USER = process.env.DB_USER;
 const PASSWORD = process.env.DB_PASSWORD;
 const NAME = process.env.DB_NAME;
 const PORT = process.env.PORT;
+const URL_PERMIT_1 = process.env.URL_PERMIT_1;
 
 
 export default {
@@ -16,6 +17,7 @@ export default {
     USER,
     PASSWORD,
     NAME,
-    PORT
+    PORT,
+    URL_PERMIT_1
 }
 

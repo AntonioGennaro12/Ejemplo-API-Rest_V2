@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
 import amigosRutas from "./rutas/amigos.rutas.js";
+import configuracion from "./configuracion.js";
 
 const app = express();
 
 app.use(express.json());
 
-const urlsPermitidas = ["http://127.0.0.1:5502"]; 
+const urlsPermitidas = [configuracion.URL_PERMIT_1]; 
 
 app.use(cors({
     origin: (origin, callback)=>{
