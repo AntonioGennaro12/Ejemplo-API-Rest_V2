@@ -18,8 +18,7 @@ app.use(cors({
         else{
             const error = new Error ("No permitido por Cors");
             error.status = 401;
-            console.log(origin+"igual lo dejo pasar");
-            callback(error, true);
+            callback(error, false);
         }
     }
 })); 
